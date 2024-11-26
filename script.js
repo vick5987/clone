@@ -88,7 +88,117 @@ noteInput.addEventListener('keypress', function (event) {
     }
   }
 });
+// Load notes from LocalStorage on page load
+window.onload = function () {
+  loadNotesFromLocalStorage();
+};
 
+// Save new note to LocalStorage
+function saveNoteToLocalStorage(note) {
+  let notes = JSON.parse(localStorage.getItem('notes')) || [];
+  notes.push(note);
+  localStorage.setItem('notes', JSON.stringify(notes));
+}
+
+// Load notes from LocalStorage and display them in the DOM
+function loadNotesFromLocalStorage() {
+  const notes = JSON.parse(localStorage.getItem('notes')) || [];
+  notes.forEach(note => addNoteToDOM(note));
+}
+
+// Add a note to the DOM
+function addNoteToDOM(note) {
+  const noteCard = document.createElement('div');
+  noteCard.classList.add('note-card');
+
+  const noteTitle = document.createElement('div');
+  noteTitle.classList.add('note-title');
+  noteTitle.textContent = note.title;
+
+  const noteContent = document.createElement('div');
+  noteContent.classList.add('note-content');
+  noteContent.textContent = note.content;
+  
+  const noteFooter = document.createElement('div');
+  noteFooter.classList.add('note-footer');
+
+  // Archive Button
+  const archiveIcon = document.createElement('span');
+  archiveIcon.classList.add('material-icons');
+  archiveIcon.textContent = 'archive';
+  archiveIcon.onclick = function () {
+    archiveNote(note.id);
+  };
+
+  // Delete Button
+  const deleteIcon = document.createElement('span');
+  deleteIcon.classList.add('material-icons');
+  deleteIcon.textContent = 'delete';
+  deleteIcon.onclick = function () {
+    deleteNote(note.id);
+  };
+
+  noteFooter.appendChild(archiveIcon);
+  noteFooter.appendChild(deleteIcon);
+
+  noteCard.appendChild(noteTitle);
+  noteCard.appendChild(noteContent);
+  noteCard.appendChild(noteFooter);
+
+  if (note.archived) {
+    document.querySelector('.archived-notes-grid').appendChild(noteCard);
+  } else {
+    document.querySelector('.notes-grid').appendChild(noteCard);
+  }
+}
+
+// Handle new note input
+const noteInput = document.getElementById('note-input');
+noteInput.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    const noteText = noteInput.value.trim();
+    if (noteText) {
+      const newNote = {
+        id: Date.now(),
+        title: 'New Note',
+        content: noteText,
+        archived: false
+      };
+      saveNoteToLocalStorage(newNote);
+      addNoteToDOM(newNote);
+      noteInput.value = ''; // Clear the input
+    }
+  }
+});
+
+// Archive a note
+function archiveNote(noteId) {
+  let notes = JSON.parse(localStorage.getItem('notes')) || [];
+  notes = notes.map(note => {
+    if (note.id === noteId) {
+      note.archived = true; // Set note to archived
+    }
+    return note;
+  });
+  localStorage.setItem('notes', JSON.stringify(notes));
+  renderNotes(); // Re-render the notes
+}
+
+// Delete a note
+function deleteNote(noteId) {
+  let notes = JSON.parse(localStorage.getItem('notes')) || [];
+  notes = notes.filter(note => note.id !== noteId); // Remove note by filtering it out
+  localStorage.setItem('notes', JSON.stringify(notes));
+  renderNotes(); // Re-render the notes
+}
+
+// Re-render notes after an action
+function renderNotes() {
+  document.querySelector('.notes-grid').innerHTML = ''; // Clear current notes
+  document.querySelector('.archived-notes-grid').innerHTML = ''; // Clear archived notes
+  loadNotesFromLocalStorage();
+}
 // Archive a note
 function archiveNote(noteId) {
   let notes = JSON.parse(localStorage.getItem('notes')) || [];
@@ -149,5 +259,20 @@ searchInput.addEventListener('input', function () {
     } else {
       note.style.display = 'none';
     }
+    // Search functionality
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', function () {
+  const query = searchInput.value.toLowerCase();
+  const notes = document.querySelectorAll('.note-card');
+  notes.forEach(note => {
+    const title = note.querySelector('.note-title').textContent.toLowerCase();
+    const content = note.querySelector('.note-content').textContent.toLowerCase();
+    if (title.includes(query) || content.includes(query)) {
+      note.style.display = 'block';
+    } else {
+      note.style.display = 'none';
+    }
+  });
+});
   });
 });
