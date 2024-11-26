@@ -1,0 +1,254 @@
+/* General Reset and Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f1f3f4;
+  color: #202124;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header .logo {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 500;
+  color: #5f6368;
+}
+
+.header .logo span {
+  margin-left: 5px;
+}
+
+.header .search-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f1f3f4;
+  border-radius: 8px;
+  width: 60%;
+}
+
+.header .search-bar input {
+  border: none;
+  outline: none;
+  background: none;
+  flex: 1;
+  font-size: 16px;
+}
+
+.header .search-bar .material-icons {
+  color: #5f6368;
+  cursor: pointer;
+}
+
+.header .profile-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header .profile-section .material-icons {
+  color: #5f6368;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #fff;
+  height: 100vh;
+  padding: 20px 10px;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.sidebar .menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #202124;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar .menu-item:hover {
+  background-color: #f1f3f4;
+}
+
+.sidebar .menu-item .material-icons {
+  margin-right: 10px;
+  color: #5f6368;
+}
+
+/* Main Content */
+.main-content {
+  margin-left: 270px;
+  padding: 20px;
+}
+
+.main-content .note-input {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.main-content .note-input:hover {
+  background-color: #e8eaed;
+}
+
+.main-content .note-input textarea {
+  resize: none;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.main-content .note-input .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.main-content .note-input .actions .material-icons {
+  font-size: 20px;
+  cursor: pointer;
+  color: #5f6368;
+  transition: color 0.3s ease;
+}
+
+.main-content .note-input .actions .material-icons:hover {
+  color: #202124;
+}
+
+/* Notes Grid */
+.main-content .notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.main-content .note-card {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.main-content .note-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.main-content .note-card .note-title {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.main-content .note-card .note-content {
+  font-size: 14px;
+  color: #5f6368;
+}
+
+.main-content .note-card .note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-content .note-card .note-footer .material-icons {
+  font-size: 20px;
+  cursor: pointer;
+  color: #5f6368;
+  transition: color 0.3s ease;
+}
+
+.main-content .note-card .note-footer .material-icons:hover {
+  color: #202124;
+}
+
+/* Hidden Notes Section - Security Feature */
+.hidden-notes {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hidden-notes h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.hidden-notes input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #dadce0;
+  width: 100%;
+}
+
+.hidden-notes button {
+  padding: 10px 15px;
+  background-color: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .header {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .header .search-bar {
+    flex: 100%;
+    margin: 10px 0;
+  }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Keep Clone</title>
+  <!-- Google Fonts and Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <div class="header">
+    <span class="material-icons menu-icon">menu</span>
+    <div class="logo">
+      <span class="material-icons">lightbulb</span>
+      <span>Keep</span>
+    </div>
+    <div class="search-bar">
+      <span class="material-icons">search</span>
+      <input type="text" placeholder="Search notes" />
+    </div>
+    <div class="profile-section">
+      <span class="material-icons">refresh</span>
+      <span class="material-icons">view_agenda</span>
+      <span class="material-icons">settings</span>
+      <span class="material-icons">account_circle</span>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="#" class="menu-item">
+      <span class="material-icons">lightbulb</span>
+      Notes
+    </a>
+    <a href="#" class="menu-item">
+      <span class="material-icons">notifications</span>
+      Reminders
+    </a>
+    <a href="#" class="menu-item">
+      <span class="material-icons">edit</span>
+      Edit Labels
+    </a>
+    <a href="#" class="menu-item">
+      <span class="material-icons">archive</span>
+      Archive
+    </a>
+    <a href="#" class="menu-item">
+      <span class="material-icons">delete</span>
+      Trash
+    </a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Note Input Section -->
+    <div class="note-input">
+      <textarea rows="2" placeholder="Take a note..."></textarea>
+      <div class="actions">
+        <span class="material-icons">check_box</span> <!-- Checklists -->
+        <span class="material-icons">brush</span> <!-- Scribble/Drawing -->
+        <span class="material-icons">image</span> <!-- Image Upload -->
+        <input type="file" id="file-input" style="display: none;" />
+        <span class="material-icons" onclick="document.getElementById('file-input').click();">attach_file</span> <!-- File Attachments -->
+      </div>
+    </div>
+
+    <!-- Hidden Notes (Secure Notes) Section -->
+    <div class="hidden-notes">
+      <h3>Hidden Notes (Secure)</h3>
+      <input type="password" id="note-password" placeholder="Enter password to view notes">
+      <button id="unlock-notes">Unlock</button>
+      <div id="secure-notes" style="display: none;">
+        <!-- Secure notes will be displayed here after password verification -->
+      </div>
+    </div>
+
+    <!-- Notes Grid Section -->
+    <div class="notes-grid">
+      <!-- Example notes will be dynamically added here -->
+    </div>
+  </div>
+
+  <!-- External JavaScript -->
+  <script src="script.js"></script>
+</body>
+
+</html>
